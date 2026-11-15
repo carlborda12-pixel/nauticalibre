@@ -1,0 +1,6 @@
+https://hfjyigmdmmzvyffxbdwy.supabase.co
+
+sb_publishable_wSuGVxKBNa_-jRcIdIL5FQ_dyyIoIXp api key
+
+sb_secret_0Pb7j
+Bjs0U586YdcqOb5aw_75ptgDsf secret key
