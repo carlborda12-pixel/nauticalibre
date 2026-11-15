@@ -1,0 +1,5 @@
+node_modules/
+credenciales-iniciales.txt
+supabase/.env*
+supabase/.temp/
+.env

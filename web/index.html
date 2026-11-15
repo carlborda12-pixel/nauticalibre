@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Náutica Aire Libre · Leads</title>
+  <meta name="theme-color" content="#0f2a43">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/config.js"></script>
+  <script src="/vendor/supabase.js"></script>
+  <script src="/vendor/qrcode.js"></script>
+  <script src="/backend.js"></script>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <!-- Login -->
+  <section id="v-login" class="login" hidden>
+    <form id="f-login" class="login-card" autocomplete="on">
+      <div class="brand brand-lg"><span class="brand-mark" aria-hidden="true"></span><div><strong>Náutica Aire Libre</strong><small>Consultas de WhatsApp</small></div></div>
+      <label>Usuario<input name="usuario" autocomplete="username" required autocapitalize="none"></label>
+      <label>Clave<input name="clave" type="password" autocomplete="current-password" required></label>
+      <p class="form-error" id="login-error" role="alert"></p>
+      <button class="btn btn-primary btn-block" type="submit">Ingresar</button>
+      <div id="demo-access" class="demo-access" hidden></div>
+    </form>
+  </section>
+
+  <!-- App -->
+  <div id="v-app" class="app" hidden>
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"></span><strong>Náutica · Leads</strong></div>
+      <span id="demo-badge" class="badge badge-warn" hidden title="WhatsApp todavía no está conectado: los mensajes no salen">MODO PRUEBA</span>
+      <a id="demo-cliente" class="btn btn-ghost btn-sm" href="/cliente.html" target="_blank" rel="noopener" hidden>📱 Simular cliente</a>
+      <label id="demo-ver" class="demo-ver" hidden>Ver como <select id="demo-user"></select></label>
+      <nav class="tabs" id="tabs">
+        <a href="#bandeja" data-tab="bandeja">Bandeja</a>
+        <a href="#metricas" data-tab="metricas" data-admin>Métricas</a>
+        <a href="#links" data-tab="links">Links</a>
+        <a href="#config" data-tab="config" data-admin>Configuración</a>
+      </nav>
+      <div class="user-menu">
+        <button class="btn btn-ghost btn-sm" id="btn-push" hidden>🔔 Activar avisos</button>
+        <details class="dropdown">
+          <summary id="user-name" class="btn btn-ghost btn-sm"></summary>
+          <div class="dropdown-menu">
+            <button id="btn-clave">Cambiar clave</button>
+            <button id="btn-logout">Salir</button>
+          </div>
+        </details>
+      </div>
+    </header>
+
+    <!-- Bandeja -->
+    <main id="t-bandeja" class="inbox" data-panel="bandeja">
+      <aside class="inbox-list">
+        <div class="seg" id="vistas" role="tablist">
+          <button data-vista="pool" role="tab">Sin tomar <b class="count" id="c-pool">0</b></button>
+          <button data-vista="mios" role="tab">Mías <b class="count" id="c-mios">0</b></button>
+          <button data-vista="todos" role="tab" data-admin>Todas <b class="count" id="c-todos">0</b></button>
+          <button data-vista="cerrados" role="tab">Cerradas</button>
+        </div>
+        <input type="search" id="q" class="search" placeholder="Buscar nombre, teléfono o embarcación">
+        <ul id="lista" class="lead-list" aria-live="polite"></ul>
+      </aside>
+      <section class="inbox-detail" id="detalle">
+        <div class="empty">
+          <p class="empty-title">Elegí una consulta</p>
+          <p>Las consultas nuevas aparecen en <b>Sin tomar</b>. El primero que la toma o responde se la queda.</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Métricas -->
+    <main id="t-metricas" class="page" data-panel="metricas" hidden>
+      <div class="filters">
+        <div class="seg seg-sm" id="presets">
+          <button data-p="hoy">Hoy</button><button data-p="7d">7 días</button><button data-p="mes">Este mes</button><button data-p="mesant">Mes anterior</button>
+        </div>
+        <label class="inline">Desde <input type="date" id="m-desde"></label>
+        <label class="inline">Hasta <input type="date" id="m-hasta"></label>
+        <a class="btn btn-sm" id="m-export" href="#">⬇ Exportar CSV</a>
+      </div>
+      <div id="m-body"></div>
+    </main>
+
+    <!-- Links -->
+    <main id="t-links" class="page narrow" data-panel="links" hidden>
+      <h2>Links de WhatsApp por embarcación</h2>
+      <p class="muted">Pegá el link en la publicación, historia o web. Cuando el cliente escribe, el sistema reconoce solo la embarcación y de dónde vino.</p>
+      <form id="f-link" class="card form-grid">
+        <label>Número de la empresa <input id="l-numero" inputmode="numeric" placeholder="5493764123456"></label>
+        <label>Embarcación / producto <input id="l-prod" list="dl-productos" placeholder="Escribí para buscar (vacío = consulta general)"></label>
+        <label>Dónde lo vas a publicar <select id="l-origen"></select></label>
+        <button class="btn btn-primary" type="submit">Generar link</button>
+      </form>
+      <div id="l-result"></div>
+    </main>
+
+    <!-- Configuración -->
+    <main id="t-config" class="page narrow" data-panel="config" hidden>
+      <div id="cfg-body"></div>
+    </main>
+  </div>
+
+  <datalist id="dl-productos"></datalist>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="tooltip" class="viz-tooltip" hidden></div>
+  <dialog id="dlg" class="dlg"><form method="dialog" id="dlg-form"></form></dialog>
+</body>
+</html>

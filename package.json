@@ -1,0 +1,19 @@
+{
+  "name": "nautica-supabase",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "usuarios": "node scripts/crear-usuarios.mjs",
+    "claves": "node scripts/generar-claves.mjs"
+  },
+  "devDependencies": {
+    "@supabase/supabase-js": "^2.119.0",
+    "pg": "^8.13.1",
+    "web-push": "^3.6.7"
+  },
+  "dependencies": {
+    "qrcode-generator": "^2.0.4"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Náutica Aire Libre · Leads",
+  "short_name": "Náutica Leads",
+  "description": "Consultas de WhatsApp de Náutica Aire Libre",
+  "start_url": "/#bandeja",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0f2a43",
+  "theme_color": "#0f2a43",
+  "lang": "es-AR",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

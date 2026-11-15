@@ -1,0 +1,20 @@
+# Configuración de Supabase CLI para este proyecto.
+# Las funciones validan la sesión por su cuenta (o la firma de Meta / el secreto del trigger),
+# por eso la verificación automática de JWT del gateway queda desactivada.
+[functions.whatsapp-webhook]
+verify_jwt = false
+
+[functions.push]
+verify_jwt = false
+
+[functions.enviar]
+verify_jwt = false
+
+[functions.media]
+verify_jwt = false
+
+[functions.admin-usuarios]
+verify_jwt = false
+
+[functions.simular]
+verify_jwt = false
